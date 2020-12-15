@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 //Adding components
 import Player from './components/Player';
 import Song from './components/Song';
+import Library from './components/Library';
 //Adding stayles
 // eslint-disable-next-line
 import stayle from './stayle/stayle.scss';
@@ -22,6 +23,7 @@ function App() {
         isPlaying = {isPlaying} 
         currentSong = {currentSong} 
       />
+      <Library songs={songs} />
     </div>
   );
 }
