@@ -1,0 +1,19 @@
+nav{
+    min-height: 10vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    button{
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        transition: all 0.5sec ease;
+        &:hover{
+            background: rgb(65, 65, 65);
+            color: white;
+        }
+        font-family: 'Dancing Script', cursive;
+        font-size: 120%;
+    }
+}

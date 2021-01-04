@@ -1,4 +1,4 @@
-.library{
+.library-active{
     position: fixed;
     top: 0;
     left: 0;
@@ -11,6 +11,7 @@
     h2{
         padding: 2rem;
     }
+    transition: all 1s ease;
 }
 .library-song{
     display: flex;
@@ -21,7 +22,7 @@
         width: 30%;
     }
     &:hover{
-        background-color: lightblue;
+        background-color:  rgb(182, 171, 230);
     }
 }
 .song-description{
@@ -33,6 +34,7 @@
         font-size: 0.7rem;
     }
 }
+
 *::-webkit-scrollbar{
     width: 5px;
 }
@@ -44,4 +46,11 @@
     border-radius: 20px;
     border:transparent;
 }
-
+.selected{
+    background: rgb(182, 171, 230);
+}
+.library-pasive{
+    transform: translateX(-100%);
+    transition: all 1s ease;
+    opacity: 0;
+}
