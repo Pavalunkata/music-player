@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPlay, faArrowAltCircleLeft, faArrowAltCircleRight, faPause} from '@fortawesome/free-solid-svg-icons'
 
-const Player = ({isPlaying, audioRef, playSongHandler, setSongInfo, songInfo, songs, currentSong, setCurrentSong }) =>{
+const Player = ({isPlaying, audioRef, playSongHandler, setSongInfo, songInfo, songs, currentSong, setCurrentSong, setSongs }) =>{
 
+// Adding handler
     const dragHandler = (e) =>{
         audioRef.current.currentTime=e.target.value;
         setSongInfo ({...songInfo, currentTime: e.target.value});
@@ -14,6 +15,24 @@ const Player = ({isPlaying, audioRef, playSongHandler, setSongInfo, songInfo, so
         );
  
     };
+// useEffect
+    useEffect(() =>{
+    // Adding accent to selected song
+    const accentSong = songs.map((song) =>{
+        if(song.id === currentSong.id){
+            return {
+                ...song,
+                active: true,
+            }
+        }else{
+            return{
+                ...song,
+                active: false,
+                }
+            }
+        });
+        setSongs (accentSong)
+    });
 
     const chnageSongHandler = (duration) => {
         let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
@@ -24,6 +43,9 @@ const Player = ({isPlaying, audioRef, playSongHandler, setSongInfo, songInfo, so
             if((currentIndex -1 ) % songs.length === -1){
                 setCurrentSong(songs[songs.length - 1])
             }
+        }
+        if(isPlaying){
+            setTimeout(() => {  audioRef.current.play(); }, 1000);
         }
     };
 
@@ -38,7 +60,7 @@ const Player = ({isPlaying, audioRef, playSongHandler, setSongInfo, songInfo, so
                     onChange={dragHandler} 
                     type="range" 
                     />
-                    <p>{getTime(songInfo.duration)}</p>
+                    <p>{songInfo.duration ? getTime(songInfo.duration) : "0:00"}</p>
                 </div>
                 <div className="play-control">
                     <FontAwesomeIcon onClick={() => chnageSongHandler("skip-back")} className="skip-back" size="2x" icon={faArrowAltCircleLeft} />
